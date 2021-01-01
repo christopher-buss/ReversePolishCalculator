@@ -1,0 +1,48 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+/**
+ * The Class CalcModel.
+ * Used for calling the correct calculator when expression passed.
+ * 
+ * @author Christopher Buss.
+ */
+public class CalcModel {
+  private Exception exception;
+  
+  /** The current type of calculator. */
+  private Calculator current;
+  
+  /**
+   * Evaluates infix or postfix expression depending on current type.
+   *
+   * @param expression the passed infix or postifx expression
+   * @return float the evaluated expression
+   * @throws InvalidExpressionException if expression is invalid
+   * @throws StackEmptyException if the stack is empty
+   */
+  public float evaluate(String expression) {
+    System.out.println(current);
+    try {
+      return current.evaluate(expression);
+    } catch (InvalidExpressionException | StackEmptyException e) {
+      exception = e;
+      return Float.NEGATIVE_INFINITY;
+    }
+  }
+  
+  /**
+   * Sets the current type of expression to call.
+   *
+   * @param type the new type
+   */
+  public void setType(Calculator type) {
+    this.current = type;
+  }
+  
+  public Exception getException() {
+    return this.exception;
+  }
+}

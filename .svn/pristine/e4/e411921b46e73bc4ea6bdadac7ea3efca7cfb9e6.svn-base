@@ -1,0 +1,93 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+import main.java.stack.OpStack;
+
+/**
+ * The Class StandardCalc. 
+ * An implementation of the Shunting Yard Algorithm.
+ * Used for parsing mathematical expressions specified in infix notation, and converting to
+ * postfix notation (Reverse Polish Notation), to be used in the RevPolishCalc class.
+ * 
+ * @author Christopher Buss.
+ */
+public class StandardCalc extends IsOperator implements Calculator {
+  
+  RevPolishCalc rpCalc = new RevPolishCalc();
+  
+  /** Sting to build postfix output from infix. */
+  StringBuilder postfix = new StringBuilder();
+  
+  /** The op stack. */
+  OpStack opStack = new OpStack();
+  
+  /**
+   * Translates infix notation to postfix notation.
+   *
+   * @param infix input in infix notation from the user to translate to postfix
+   * @return the converted postfix string
+   * @throws InvalidExpressionException if infix expression invalid
+   * @throws StackEmptyException if stack is empty
+   */
+  public float evaluate(String infix) throws InvalidExpressionException, StackEmptyException {
+    /* Checks that provided string exists */
+    if (infix == null) {
+      throw new InvalidExpressionException("Input provided is null.");
+    } 
+    
+    /* Adds white space before and after ( ) and math operators */
+    infix = infix.replaceAll("\\(|\\)|[-+*/]", " $0 "); 
+    
+    for (String token : infix.trim().split("\\s+")) { // Splits tokens at white space
+      if (this.isOperator(token)) {
+        Symbol toPush = IsOperator.getOp();
+        /*
+         * Need to make sure:
+         * - If the operator stack is not empty
+         * - If the element at the top of the stack is an operator
+         * - If the operator at the top of stack has a greater or equal precedence
+         */        
+        if (!opStack.isEmpty()
+            && this.isOperator(opStack.top().toString())
+            && opStack.top().getPrecendence() >= toPush.getPrecendence()) {
+          postfix.append(opStack.pop().toString()).append(' ');
+        } 
+        opStack.push(toPush);
+      } else if (token.equals("(")) {
+        /* Left bracket will be removed when right bracket is found */
+        opStack.push(Symbol.LEFT_BRACKET);
+      } else if (token.equals(")")) {
+        /* Pop the stack until a left bracket is present */
+        while (!opStack.isEmpty()) {          
+          if (!(opStack.top().toString().equals("("))) {
+            postfix.append(opStack.pop().toString()).append(' ');
+          } else {
+            break;
+          }
+        }
+        if (opStack.isEmpty()) {
+          throw new InvalidExpressionException("Mismatched brackets");          
+        }
+        /* Remove left bracket */
+        opStack.pop();
+      } else if (token.matches("-?\\d+(\\.\\d+)?|^\\s*$")) { // token is a number or empty
+        postfix.append(token).append(' ');
+      } else {
+        throw new InvalidExpressionException("Mismatched brackets");
+      }
+    }    
+    
+    while (!opStack.isEmpty()) {
+      /* Checks if there are still brackets in the opStack */
+      if (opStack.top().toString().equals("(") || opStack.top().toString().equals(")")) {
+        throw new InvalidExpressionException("Mismatched brackets");
+      }
+      /* Add any excess element in the stack to the postfix string */
+      postfix.append(opStack.pop().toString()).append(' ');
+    }
+    
+    /* Returns postfix without leading or trailing white space */
+    return rpCalc.evaluate(postfix.toString().trim());  
+  } 
+}

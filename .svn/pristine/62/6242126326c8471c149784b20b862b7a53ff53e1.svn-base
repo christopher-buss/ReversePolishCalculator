@@ -1,0 +1,30 @@
+package test.java.deployment;
+
+import static org.junit.Assert.assertEquals;
+
+import main.java.deployment.Controller;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+/**
+ * The Class AControllerShould.
+ */
+class AControllerShould {
+  Controller control;
+
+  /**
+   * Initialisation of entry class for all relevant tests.
+   */
+  @BeforeEach
+  void init() {
+    control = new Controller();
+  }
+
+  /**
+   * Calculate postfix expression through controller test.
+   */
+  @Test
+  void calculatePostfixExpression() {
+    assertEquals(14f, control.calculate("7 7 +"), 0f);
+  }
+}

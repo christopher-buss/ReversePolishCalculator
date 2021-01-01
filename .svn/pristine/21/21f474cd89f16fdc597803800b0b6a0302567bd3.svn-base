@@ -1,0 +1,55 @@
+package test.java.facade;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import main.java.exceptions.StackEmptyException;
+import main.java.stack.StrStack;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+/**
+ * The Class AStringStackShould.
+ * 
+ * @author Christopher Buss.
+ */
+class AStringStackShould {
+  
+  /** The str stack. */
+  private StrStack strStack;
+
+  /**
+   * Initialisation of strStack class for all relevant tests.
+   */
+  @BeforeEach
+  void init() {
+    strStack = new StrStack();
+  }
+
+  /**
+   * Return value pushed to stack test.
+   */
+  @Test
+  void returnValuePushedToStackTest() throws StackEmptyException {
+    strStack.push("string");
+    assertEquals("string", strStack.pop());
+  }
+  
+  /**
+   * Should return true if the stack is empty.
+   */
+  @Test
+  void returnTrueWhenStackIsEmptyTest() {
+    assertTrue(strStack.isEmpty());
+  }  
+  
+  /**
+   * Should return false if stack is not empty.
+   */
+  @Test
+  void returnFalseWhenStackIsNotEmptyTest() {
+    strStack.push("string");
+    assertFalse(strStack.isEmpty());
+  } 
+}

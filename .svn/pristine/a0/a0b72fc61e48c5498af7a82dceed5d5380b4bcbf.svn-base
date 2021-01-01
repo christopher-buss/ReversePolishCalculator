@@ -1,0 +1,46 @@
+package main.java.stack;
+
+import main.java.Entry;
+import main.java.exceptions.BadTypeException;
+import main.java.exceptions.StackEmptyException;
+
+/**
+ * The Class StrStack.
+ */
+public class StrStack {
+  
+  /** The str stack. */
+  private Stack strStack = new Stack();
+
+  /**
+   * Push.
+   *
+   * @param str the string to push to stack
+   */
+  public void push(String str) {
+    this.strStack.push(new Entry(str));    
+  }
+  
+  /**
+   * Pop string from stack.
+   *
+   * @return the string on stack.
+   * @throws StackEmptyException if stack is empty
+   */
+  public String pop() throws StackEmptyException {
+    try {
+      return this.strStack.pop().getString();
+    } catch (BadTypeException e) {
+      return "";
+    }
+  }
+
+  /**
+   * Checks if the stack is empty.
+   *
+   * @return boolean true if stack empty
+   */
+  public boolean isEmpty() {
+    return this.strStack.isEmpty();
+  }
+}

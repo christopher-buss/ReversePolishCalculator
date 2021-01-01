@@ -1,0 +1,12 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+public class CalcModel {
+  Calculator postfix = new RevPolishCalc();
+  
+  public float evaluate(String expression) throws InvalidExpressionException, StackEmptyException {
+    return postfix.evaluate(expression);
+  }
+}

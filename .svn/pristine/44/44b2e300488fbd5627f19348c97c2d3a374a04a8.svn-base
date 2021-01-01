@@ -1,0 +1,37 @@
+package main.java.deployment;
+
+import main.java.CalcModel;
+import main.java.Calculator;
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+/**
+ * The Class Controller.
+ * Used to decouple the UI interface from the calculator.
+ * 
+ * @author Christopher Buss.
+ */
+public class Controller {
+  private CalcModel cmod = new CalcModel();
+  
+  /**
+   * Calculate the given expression.
+   *
+   * @param string the string
+   * @return the float
+   * @throws InvalidExpressionException the invalid expression exception
+   * @throws StackEmptyException the stack empty exception
+   */
+  public float calculate(String string) throws InvalidExpressionException, StackEmptyException {
+    return cmod.evaluate(string);
+  }
+
+  /**
+   * Change type of calculator.
+   *
+   * @param type the type
+   */
+  public void changeType(Calculator type) {
+    cmod.setType(type);    
+  }
+}

@@ -1,0 +1,31 @@
+package main.java;
+
+/**
+ * The Enum Type.
+ * The type related to the entry class.
+ * 
+ * @Author Christopher Buss.
+ */
+public enum Type {
+  NUMBER("Number"),
+  SYMBOL("Symbol"),
+  STRING("String"),
+  INVALID("Invalid"),
+  ;
+
+  /** Stored type name. */
+  private String name;
+
+  /**
+   * Instantiates a new type.
+   *
+   * @param type - the type associated with the enum name.
+   */
+  private Type(String type) {
+    this.name = type;
+  }
+
+  public String toString() {
+    return this.name;
+  } 
+}

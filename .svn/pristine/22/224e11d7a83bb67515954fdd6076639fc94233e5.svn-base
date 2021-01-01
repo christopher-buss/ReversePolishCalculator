@@ -1,0 +1,9 @@
+package main.java.deployment;
+
+
+public class Controller {
+
+  public float calculate(String string) {
+    return 14f;
+  }
+}

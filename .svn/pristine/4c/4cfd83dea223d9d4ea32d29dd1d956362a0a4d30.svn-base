@@ -1,0 +1,55 @@
+package test.java.entry;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import main.java.Entry;
+import main.java.Type;
+import main.java.exceptions.BadTypeException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
+/**
+ * The Class AnEntryWithStringConstructorShould.
+ * Used for testing an entry with String constructor.
+ * 
+ * @Author Christopher Buss.
+ */
+class AnEntryWithStringConstructorShould {
+  private Entry entry;
+  private String message = "Test String";
+
+  /**
+   * Initialisation of entry class for all relevant tests.
+   * 
+   * <p>Refactored from Test 19.
+   */  
+  @BeforeEach
+  void init() {
+    entry = new Entry(message);
+  }
+
+  /**
+   * Test 20.
+   * Should be able to get string test.
+   *
+   * <p>Created getString() function in entry that returns arbitary string.
+   */
+  @Test
+  void shouldBeAbleToGetStringTest() throws BadTypeException {
+    assertEquals(message, entry.getString());
+  }
+
+  /**
+   * Test 21.
+   * Check that correct type of entry is returned.
+   * 
+   * <p>Enum values added for all possible Types.
+   * GetType() refactored to return specific type.
+   * All constructors refactored to set the type of the entry on creation.
+   */
+  @Test
+  void beAbleToGetTypeTest() {
+    assertEquals(Type.STRING, entry.getType());
+  }
+}

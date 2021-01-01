@@ -1,0 +1,68 @@
+package test.java.entry;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import main.java.Entry;
+import main.java.Symbol;
+import main.java.Type;
+import main.java.exceptions.BadTypeException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
+/**
+ * The Class AnEntryWithSymbolConstructorShould.
+ * Used for testing an entry with Symbol constructor.
+ * 
+ * @Author Christopher Buss.
+ */
+class AnEntryWithSymbolConstructorShould {
+  private Entry entry;
+  
+  /**
+   * Initialisation of entry class for all relevant tests.
+   * 
+   * <p>Refactored from Test 17.
+   */  
+  @BeforeEach
+  void init() {
+    entry = new Entry(Symbol.PLUS);
+  }
+  
+  /**
+   * Test 18.
+   * Be able to get symbol test.
+   *
+   * <p>Created symbol enum with singular value 'PLUS' to satisfy test.
+   * GetSymbol created, returning arbitary value.
+   */
+  @Test
+  void beAbleToGetSymbolTest() throws BadTypeException {
+    assertEquals(Symbol.PLUS, entry.getSymbol());
+  }
+  
+  /**
+   * Test 28.
+   * Check that correct type of entry is returned.
+   * 
+   * <p>No refactoring required. Test passed. Works as intended.
+   */
+  @Test //test 8 add SYMBOL to Type
+  void beAbleToGetTypeTest() {
+    assertEquals(Type.SYMBOL, entry.getType());
+  }
+ 
+  /**
+   * Test 29.
+   * Throw bad type exception if no value test.
+   * 
+   * <p>Refactored getSymbol(), getString() to use Type enum for consistency.
+   */
+  @Test
+  void throwBadTypeExceptionIfNoValueTest() {
+    assertThrows(BadTypeException.class, () -> {
+      entry.getValue();
+    });
+  }
+}

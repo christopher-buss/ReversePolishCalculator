@@ -1,0 +1,24 @@
+package test.java.calcmodel;
+
+import static org.junit.Assert.assertEquals;
+
+import main.java.CalcModel;
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class ACalcModelShould {
+  CalcModel cm;
+  
+  @BeforeEach
+  void init() {
+    cm = new CalcModel();
+  }
+
+  @Test
+  void returnCorrectValueAfterPostfixCallTest() throws InvalidExpressionException, 
+      StackEmptyException {
+    assertEquals(14f, cm.evaluate("7 7 +"), 0f);
+  }
+}

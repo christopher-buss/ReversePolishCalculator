@@ -1,0 +1,67 @@
+package main.java;
+
+import main.java.exceptions.BadTypeException;
+
+/**
+ * The Class Entry.
+ * The type to be stored in stack.
+ * 
+ * @Author Christopher Buss.
+ */
+public class Entry {
+  /** Number used in calculation. */
+  private float value;
+  
+  /** Symbol used for arithmetic. */
+  private Symbol other;
+
+  /** The type of the provided constructor. */
+  private Type type;
+
+  /**
+   * Instantiates a new entry.
+   *
+   * @param value - an input of a float value
+   */
+  public Entry(float value) {
+    this.type = Type.NUMBER;
+    this.value = value;
+  }
+
+  /**
+   * Instantiates a new entry.
+   *
+   * @param which - an input of a symbol
+   */
+  public Entry(Symbol which) {
+    this.type = Type.SYMBOL;
+    this.other = which;
+  }
+
+
+  /**
+   * Gets the float value.
+   *
+   * @return value - the float used in calculation
+   * @throws BadTypeException - called when entry isnt a value
+   */
+  public float getValue() throws BadTypeException {
+    if (this.type != Type.NUMBER) {
+      throw new BadTypeException("There is no Value present.");      
+    }
+    return this.value;
+  }
+
+  /**
+   * Gets the symbol.
+   *
+   * @return symbol - the arithmetic symbol stored
+   * @throws BadTypeException - called when entry isnt a symbol
+   */
+  public Symbol getSymbol() throws BadTypeException {
+    if (this.type != Type.SYMBOL) {
+      throw new BadTypeException("There is no Symbol present.");
+    }
+    return this.other;
+  }
+}

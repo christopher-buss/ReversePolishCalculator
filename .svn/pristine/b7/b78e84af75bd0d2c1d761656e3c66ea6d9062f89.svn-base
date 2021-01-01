@@ -1,0 +1,56 @@
+package application;
+
+import main.java.CalcModel;
+import main.java.Calculator;
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Controller.
+ * Used to decouple the UI interface from the calculator.
+ * 
+ * @author Christopher Buss.
+ */
+public class Controller {
+  
+  /** The view. */
+  ViewInterface view = null;
+  
+  /** The cmod. */
+  private CalcModel cmod = new CalcModel();
+  
+  /**
+   * Calculate the given expression.
+   *
+   * @throws InvalidExpressionException the invalid expression exception
+   * @throws StackEmptyException the stack empty exception
+   */
+  public void calculate() {
+    view.setAnswer(Float.toString(cmod.evaluate(view.getExpression())));
+  }
+
+  /**
+   * Change type of calculator.
+   *
+   * @param type the type
+   */
+  public void changeType(Calculator type) {
+    cmod.setType(type);    
+  }
+  
+  public void getException() {
+    cmod.getException();
+  }
+  
+  /**
+   * Instantiates a new controller.
+   *
+   * @param view the view
+   */
+  public Controller(ViewInterface view) {
+    this.view = view;
+    view.addCalcObserver(this::calculate);
+    view.addTypeObserver(this::changeType);
+  }
+}

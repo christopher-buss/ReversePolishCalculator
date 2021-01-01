@@ -1,0 +1,49 @@
+package test.java.calcmodel;
+
+import static org.junit.Assert.assertEquals;
+
+import main.java.CalcModel;
+import main.java.Calculator;
+import main.java.StandardCalc;
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+ 
+/**
+ * The Class ACalcModelShould.
+ * Used for testing different calculators when calling CalcModel.
+ * 
+ * @author Christopher Buss.
+ */
+class ACalcModelShould {
+  CalcModel cm;
+  
+  /**
+   * Initialisation of entry class for all relevant tests.
+   */
+  @BeforeEach
+  void init() {
+    cm = new CalcModel();
+  }
+
+  /**
+   * Return correct value after postfix call test.
+   */
+  @Test
+  void returnCorrectValueAfterPostfixCallTest() throws InvalidExpressionException, 
+      StackEmptyException {
+    assertEquals(14f, cm.evaluate("7 7 +"), 0f);
+  }
+  
+  /**
+   * Return correct value after infix call test.
+   */
+  @Test
+  void returnCorrectValueAfterInfixCallTest() throws InvalidExpressionException, 
+      StackEmptyException {
+    Calculator infix = new StandardCalc();
+    cm.setType(infix);
+    assertEquals(14f, cm.evaluate("7 + 7"), 0f);
+  }
+}

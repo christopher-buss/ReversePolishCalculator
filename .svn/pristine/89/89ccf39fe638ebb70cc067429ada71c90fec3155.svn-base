@@ -1,0 +1,61 @@
+package test.java.deployment;
+
+import static org.junit.Assert.assertEquals;
+
+import application.Controller;
+import main.java.Calculator;
+import main.java.RevPolishCalc;
+import main.java.StandardCalc;
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+/**
+ * The Class AControllerShould.
+ * Used to test the interface controller.
+ * 
+ * @author Christopher Buss.
+ */
+class AControllerShould {
+  Controller control;
+  
+  /* Infix or Postfix calculators for changing calc model */
+  Calculator infix = new StandardCalc();
+  Calculator postfix = new RevPolishCalc();
+
+  /**
+   * Initialisation of entry class for all relevant tests.
+   */
+  @BeforeEach
+  void init() {
+    control = new Controller();
+  }
+
+  /**
+   * Calculate postfix expression through controller test.
+   */
+  @Test
+  void calculatePostfixExpressionTest() throws InvalidExpressionException, StackEmptyException {
+    assertEquals(14f, control.calculate("7 7 +"), 0f);
+  }
+  
+  /**
+   * Calculate infix expression test.
+   */
+  @Test
+  void calculateInfixExpressionTest() throws InvalidExpressionException, StackEmptyException {
+    control.changeType(infix);
+    assertEquals(14f, control.calculate("7 + 7"), 0f);
+  }
+  
+  /**
+   * Calculate postfix expression after changing to postfix test.
+   */
+  @Test
+  void calculatePostfixExpressionAfterChangingToPostfixTest() throws InvalidExpressionException, 
+      StackEmptyException {
+    control.changeType(postfix);
+    assertEquals(14f, control.calculate("7 7 +"), 0f);
+  }
+}

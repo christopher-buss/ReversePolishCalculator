@@ -1,0 +1,14 @@
+package application;
+
+import java.util.function.Consumer;
+import main.java.Calculator;
+
+public interface ViewInterface {
+  public String getExpression();
+  
+  public void setAnswer(String expression);
+  
+  public void addCalcObserver(Observer f);
+  
+  public void addTypeObserver(Consumer<Calculator> type);  
+}

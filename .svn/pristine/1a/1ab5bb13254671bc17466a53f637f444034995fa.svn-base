@@ -1,0 +1,18 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+
+/**
+ * Generic interface for allowing calculation of string expressions.
+ */
+public interface Calculator {
+  
+  /**
+   * Evaluate.
+   *
+   * @param expression the infix or postfix expression
+   * @return the float evaluation
+   * @throws InvalidExpressionException the invalid expression exception
+   */
+  float evaluate(String expression) throws InvalidExpressionException;
+}

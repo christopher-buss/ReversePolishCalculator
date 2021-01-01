@@ -1,0 +1,20 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+/**
+ * Generic interface for allowing calculation of string expressions.
+ */
+public interface Calculator {
+  
+  /**
+   * Evaluate.
+   *
+   * @param expression the infix or postfix expression
+   * @return the float evaluation
+   * @throws InvalidExpressionException the invalid expression exception
+   * @throws StackEmptyException  if stack is empty
+   */
+  float evaluate(String expression) throws InvalidExpressionException, StackEmptyException;
+}

@@ -1,0 +1,5 @@
+package application.java;
+
+public enum OpType {
+  INFIX, POSTFIX;
+}

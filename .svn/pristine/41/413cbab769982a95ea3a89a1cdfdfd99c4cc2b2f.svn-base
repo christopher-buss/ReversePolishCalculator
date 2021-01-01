@@ -1,0 +1,37 @@
+package main.java;
+
+import main.java.exceptions.InvalidExpressionException;
+import main.java.exceptions.StackEmptyException;
+
+/**
+ * The Class CalcModel.
+ * Used for calling the correct calculator when expression passed.
+ * 
+ * @author Christopher Buss.
+ */
+public class CalcModel {
+  
+  /** The current type of calculator. */
+  Calculator current = new RevPolishCalc(); // Uses polish calculator as default
+  
+  /**
+   * Evaluate.
+   *
+   * @param expression the passed infix or postifx expression
+   * @return float the evaluated expression
+   * @throws InvalidExpressionException if expression is invalid
+   * @throws StackEmptyException if the stack is empty
+   */
+  public float evaluate(String expression) throws InvalidExpressionException, StackEmptyException {
+    return current.evaluate(expression);
+  }
+  
+  /**
+   * Sets the type.
+   *
+   * @param type the new type
+   */
+  public void setType(Calculator type) {
+    this.current = type;
+  }
+}
